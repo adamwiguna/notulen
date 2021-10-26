@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use CURLFile;
 use App\Models\Note;
 use App\Models\History;
 use App\Models\Note_Image;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\NoteImageController;
 
 class NoteImageController extends Controller
 {
@@ -89,6 +91,41 @@ class NoteImageController extends Controller
                 $noteImage->save();
                 $count++;
 
+                // //* Kode untuk melakukan compress gambar menggunakan api reSmush.it
+
+                // //Compress Image Code Here
+                // $file = $upload_path.$image_full_name;
+                // $mime = mime_content_type($file);
+                // $info = pathinfo($file);
+                // $name = $info['basename'];
+                // $output = new CURLFile($file, $mime, $name);
+                // $data = array(
+                //     "files" => $output,
+                // );
+
+                // $ch = curl_init();
+                // curl_setopt($ch, CURLOPT_URL, 'http://api.resmush.it/?qlty=80');
+                // curl_setopt($ch, CURLOPT_POST,1);
+                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                // curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+                // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                // $result = curl_exec($ch);
+                // if (curl_errno($ch)) {
+                // $result = curl_error($ch);
+                // }
+                // curl_close ($ch);
+
+                // $arr_result = json_decode($result);
+ 
+                // // store the optimized version of the image
+                // $ch = curl_init($arr_result->dest);
+                // $fp = fopen($file, 'wb');
+                // curl_setopt($ch, CURLOPT_FILE, $fp);
+                // curl_setopt($ch, CURLOPT_HEADER, 0);
+                // curl_exec($ch);
+                // curl_close($ch);
+                // fclose($fp);
+
             }
 
             $request->session()->flash('success', 'Berhasil menambahkan Foto');
@@ -155,5 +192,18 @@ class NoteImageController extends Controller
             [NoteImageController::class,'index'], 
             ['note' => $note->slug])
             ->with('success', 'Foto telah terhapus');
+    }
+
+    public function galleries()
+    {
+        return view('galleries.index', [
+            'notes' => Note::with(['user', 'notedetail', 'noteImages' ])->latest()->get(),
+            'title' => 'Galleri Foto',
+            'nav' => 'galleries',
+            'breadcrumb1' => '',
+            // 'createNote' => '',
+            'navnote' => '',
+            // 'divisions' => Division::all(),
+        ]);
     }
 }

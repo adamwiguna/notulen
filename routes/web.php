@@ -78,6 +78,7 @@ Route::put('/users/update/data/{user:slug}', [UserController::class, 'updateUser
 
 
 Route::get('/histories', [HistoryController::class, 'index'])->middleware('auth');
+Route::get('/galleries', [NoteImageController::class, 'galleries'])->middleware('is_admin');
 
 
 

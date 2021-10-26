@@ -92,12 +92,17 @@
         <ul class="nav flex-column">
 
           <li class="nav-item">
-            <a class="nav-link {{ ($nav == 'notes') ?  'active' : ''}}" href="{{route('mynote')}}" style=""><i class="bi bi-journal-text"></i> Notes</a>
+            <a class="nav-link {{ ($nav == 'notes') ?  'active' : ''}}" href="{{route('notes')}}" style=""><i class="bi bi-journal-text"></i> Notes</a>
           </li>
           @can('viewUsers' , \App\Models\User::class)
           <li class="nav-item">
             <a class="nav-link {{ ($nav == 'users') ?  'active' : ''}} " href="/users" style="text-decoration:none" ><i class="bi bi-people"></i> Users</a>
           </li>
+          @endcan
+          @can('admin')
+          <li class="nav-item">
+            <a class="nav-link {{ ($nav == 'galleries') ?  'active' : ''}}" href="/galleries"><i class="bi bi-images"></i> Galleries</a>
+          </li>  
           @endcan
           @can('viewHistories', \App\Models\History::class)
           <li class="nav-item">
@@ -111,7 +116,7 @@
           <li class="nav-item">
             <form action="/logout" method="POST">
               @csrf
-              <button type="submit" class="nav-link  bg-transparent border-0"><i class="bi bi-box-arrow-right"></i> Sign out</button>
+              <button type="submit" class="nav-link  bg-transparent border-0 text-danger text-bold"><i class="bi bi-box-arrow-right"></i> Sign out</button>
             </form>
           </li>
 
@@ -148,6 +153,22 @@
       
       @if (isset($downloadNote))
       <a href="/note/word-export/{{ $notes->id }}" class="btn btn-primary btn-sm mb-3"><i class="bi bi-download"></i> Download </a>
+      <a href="https://wa.me/?text={{ url()->full() }}" class="btn btn-success btn-sm mb-3"><i class="bi bi-whatsapp"></i> Share Link </a>
+      <input id="myInput" type="hidden" value="{{ url()->full() }}">
+      <button class="btn btn-secondary btn-sm mb-3" onclick="CopyMe('{{ url()->full() }}')" ><i class="bi bi-clipboard-check"></i> Copy Link</button>
+      <script>
+        function CopyMe(TextToCopy) {
+          var TempText = document.createElement("input");
+          TempText.value = TextToCopy;
+          document.body.appendChild(TempText);
+          TempText.select();
+          
+          document.execCommand("copy");
+          document.body.removeChild(TempText);
+          
+          alert("Link sudah di-copy");
+        }      
+      </script>
       @endif
 
       <div class="">
