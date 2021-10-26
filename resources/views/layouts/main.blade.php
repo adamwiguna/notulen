@@ -145,6 +145,7 @@
           @endcan
         </div>
       </div>
+      
       @if (isset($downloadNote))
       <a href="/note/word-export/{{ $notes->id }}" class="btn btn-primary btn-sm mb-3"><i class="bi bi-download"></i> Download </a>
       @endif
