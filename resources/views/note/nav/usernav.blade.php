@@ -4,7 +4,7 @@
         <li class="nav-item">
         <a class="nav-link {{ ($navnote == 'my') ?  'active fw-bold '  : 'text-secondary'}}" href="/note/my">Saya</a>
         </li>
-        @if ( !in_array(auth()->user()->division->name,  ['KADIS', 'SEKDIS']))
+        @if ( !in_array(auth()->user()->division->name,  ['KADIS', 'SEKDIS ']))
             @can('viewNotesByDivision', \App\Models\Note::class)
                 <li class="nav-item">
                 <a class="nav-link {{ ($navnote == 'division') ?  'active fw-bold '  : 'text-secondary'}}" href="/notes/division">{{ isset(auth()->user()->division->name) ? auth()->user()->division->name : '' }}</a>
