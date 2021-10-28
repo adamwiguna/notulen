@@ -321,7 +321,7 @@ class NoteController extends Controller
 
         $validatedData = $request->validate([
             'judul' => 'required|max:255',
-            'keterangan' => 'required',
+            'keterangan' => '',
             'tanggal' => 'required',
             'pemimpin' => 'required',
             'hadir' => 'required',
@@ -330,6 +330,8 @@ class NoteController extends Controller
         $note->judul = $validatedData[('judul')];
         $note->keterangan = $validatedData[('keterangan')];
         $note->tanggal = $validatedData[('tanggal')];
+        $note->pemimpin = $validatedData[('pemimpin')];
+        $note->hadir = $validatedData[('hadir')];
         $note->save();
 
         NoteDetail::where('note_id', $note->id)->delete();

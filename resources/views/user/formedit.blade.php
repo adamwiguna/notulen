@@ -29,6 +29,22 @@
       @enderror
     </div>
     <div class="form-group">
+      <select class="form-select " aria-label=".form-select-sm example" name="level">
+        <option selected disabled value="">Authorization Level</option>
+        <option value="0" {{ ($user->authorization_level == 0) ? 'selected' :'' }}>0</option>
+        <option value="1" {{ ($user->authorization_level == 1) ? 'selected' :'' }}>1</option>
+        <option value="2" {{ ($user->authorization_level == 2) ? 'selected' :'' }}>2</option>
+        <option value="3" {{ ($user->authorization_level == 3) ? 'selected' :'' }}>3</option>
+        <option value="4" {{ ($user->authorization_level == 4) ? 'selected' :'' }}>4</option>
+        <option value="5" {{ ($user->authorization_level == 5) ? 'selected' :'' }}>5</option>
+      </select>   
+      @error('bidang')
+      <div class="invalid-feedback">
+        {{ $message }}
+      </div>
+      @enderror
+    </div>
+    <div class="form-group">
       <label for="email">Email</label>
       <input type="text" class="form-control @error('email') is-invalid  @enderror" id="email"  placeholder="Masukkan Email" name="email" value="{{ old('email', $user->email) }}">
       @error('email')

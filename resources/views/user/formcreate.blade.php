@@ -26,6 +26,22 @@
       @enderror
     </div>
     <div class="form-group">
+      <select class="form-select " aria-label=".form-select-sm example" name="level">
+        <option selected disabled value="">Authorization Level</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>   
+      @error('bidang')
+      <div class="invalid-feedback">
+        {{ $message }}
+      </div>
+      @enderror
+    </div>
+    <div class="form-group">
       <label for="email">Email</label>
       <input type="text" value="{{ old('email') }}"class="form-control @error('email') is-invalid  @enderror" id="email"  placeholder="Masukkan Email" name="email">
       @error('email')

@@ -23,7 +23,7 @@
       @enderror
     </div>
     <div class="form-group">
-      <label for="keterangan">Yang Hadir</label>
+      <label for="keterangan">Yang Hadir <a class="text-decoration-none  fst-italic text-danger" href="">-Pisahakan Dengan , (koma)-</a> </label>
       <input type="text" class="form-control form-control-sm @error('hadir') is-invalid  @enderror" id="hadir"  placeholder="Masukkan Keterangan" name="hadir" value="{{ old('hadir', auth()->user()->name) }}">
       @error('hadir')
       <div class="invalid-feedback">

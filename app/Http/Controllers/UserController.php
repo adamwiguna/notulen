@@ -54,7 +54,8 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'email' => 'required',
             'password' => 'required|min:1|max:255|confirmed',
-            'bidang' => ''
+            'bidang' => '',
+            'level' => '',
         ]);
 
     //   User::create($validatedData);
@@ -74,6 +75,7 @@ class UserController extends Controller
             'name' => $validatedData[('name')],
             'email' => $validatedData[('email')],
             'password' => $validatedData[('password')],
+            'authorization_level' => (int)$validatedData[('level')],
             'division_id' => (int) $validatedData[('bidang')],
             'slug' => Str::random(20),
         ]);
@@ -107,10 +109,14 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required',
+            'bidang' => '',
+            'level' => '',
         ]);
 
         $user->name = $validatedData[('name')];
         $user->email = $validatedData[('email')];
+        $user->division_id = $validatedData[('bidang')];
+        $user->authorization_level = $validatedData[('level')];
         if ($request->password) {
             $validatedData = $request->validate([
                 'password' => 'min:1|max:255|confirmed'
