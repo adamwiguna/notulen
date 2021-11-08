@@ -23,10 +23,10 @@
           <a class="nav-link " href="/notes/{{ $notes->slug }}">Note</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/notes/images/{{ $notes->slug }}">Foto</a>
+          <a class="nav-link active" href="/notes/attendances/{{ $notes->slug }}">Kehadiran</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/notes/attendances/{{ $notes->slug }}">Peserta</a>
+          <a class="nav-link" href="/notes/images/{{ $notes->slug }}">Foto</a>
         </li>
       </ul>
     </div>
@@ -40,7 +40,7 @@
                 <input type="hidden"  name="note_id" id="" value="{{ $notes->id }}">
                 <input type="hidden"  name="note_slug" id="" value="{{ $notes->slug }}">
                   <input type="text" class="form-control form-control-sm" placeholder="Nama" name="nama" id="nama" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ old('nama')}}">
-                  <input type="text" class="form-control form-control-sm" placeholder="Instansi" name="instansi" id="instansi" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ old('instansi')}}">
+                  <input type="text" class="form-control form-control-sm" placeholder="Instansi" name="instansi" id="instansi" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ old('instansi', 'Diskominfo')}}">
                   <div class="input-group-append">
                     <button class="btn btn-sm btn-success" type="submit"><i class="bi bi-plus-square"></i></button>
                   </div>

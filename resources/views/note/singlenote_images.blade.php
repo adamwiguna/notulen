@@ -24,10 +24,10 @@
           <a class="nav-link " href="/notes/{{ $notes->slug }}">Note</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active " href="/notes/images/{{ $notes->slug }}">Foto</a>
+          <a class="nav-link " href="/notes/attendances/{{ $notes->slug }}">Kehadiran</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/notes/attendances/{{ $notes->slug }}">Peserta</a>
+          <a class="nav-link active " href="/notes/images/{{ $notes->slug }}">Foto</a>
         </li>
       </ul>
     </div>

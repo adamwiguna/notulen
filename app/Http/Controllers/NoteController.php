@@ -231,14 +231,20 @@ class NoteController extends Controller
 
         $attendance = new Attendance;
         $attendance->note_id = $note->id;
-        $attendance->nama = $validatedData[('pemimpin')];
-        $attendance->save();
-
-        $attendance = new Attendance;
-        $attendance->note_id = $note->id;
         $attendance->nama = $validatedData[('hadir')];
         $attendance->instansi = 'Diskominfo';
         $attendance->save();
+
+        if($request->isi){
+            foreach ($request->isi as $key => $isi) {
+                if($isi != ''){
+                    $noteDetail = new NoteDetail;
+                    $noteDetail->isi_note = $isi;
+                    $noteDetail->note_id = $note->id;
+                    $noteDetail->save();
+                }
+            }
+        }
 
         if ($request['isi1']) {
             $noteDetail = new NoteDetail;
@@ -335,6 +341,17 @@ class NoteController extends Controller
         $note->save();
 
         NoteDetail::where('note_id', $note->id)->delete();
+
+        if($request->isi){
+            foreach ($request->isi as $key => $isi) {
+                if($isi != ''){
+                    $noteDetail = new NoteDetail;
+                    $noteDetail->isi_note = $isi;
+                    $noteDetail->note_id = $note->id;
+                    $noteDetail->save();
+                }
+            }
+        }
 
         if ($request['isi1']) {
             $noteDetail = new NoteDetail;
@@ -460,6 +477,9 @@ class NoteController extends Controller
         }elseif (count($note->notedetail)==0) {
             $templateProcessing = new TemplateProcessor('word-template/note0.docx');
         };
+        
+        $templateProcessing = new TemplateProcessor('word-template/note.docx');
+
         $templateProcessing->setValue('id', $note->id);
         $templateProcessing->setValue('judul', strtoupper($note->judul));
         $templateProcessing->setValue('keterangan', $note->keterangan);
@@ -474,11 +494,29 @@ class NoteController extends Controller
         }
 
         $no = 1;
-
+        $values = [];
+        $replacements = [];
+        $attendances =[];
         foreach ($note->notedetail as $notedetail) {
+            $values[] = ['no' => $no, 'notedetail' => $notedetail->isi_note];
+            $replacements[] = ['notedetaill' => $notedetail->isi_note];
             $templateProcessing->setValue('notedetail'. $no, $notedetail->isi_note);
             $no++;
         }
+
+        foreach ($note->attendances as $attend) {
+            $attendances[] = ['nama' => $attend->nama];
+        }
+        // dd($replacements);
+
+        // $replacements = array(
+        //     array('customer_name' => 'Batman', 'customer_address' => 'Gotham City'),
+        //     array('customer_name' => 'Superman', 'customer_address' => 'Metropolis'),
+        // );
+
+        $templateProcessing->cloneBlock('isi', 0, true, false, $replacements);
+        $templateProcessing->cloneBlock('kehadiran', 0, true, false, $attendances);
+        // $templateProcessing->cloneRowAndSetValues('no', $values);
 
         $fileName = $note->judul.'_'.$note->pemimpin.'_'.$note->slug.'-['.$note->tanggal.']';
 
