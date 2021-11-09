@@ -63,7 +63,8 @@
               <ul class="list-group list-group-flush">
                   @foreach ($noteContents as $index => $noteContent)
                     <li class="list-group-item pl-2 d-flex" >
-                        <textarea wire:model="noteContents.{{ $index }}" rows="3" type="text" class="mr-1 form-control form-control-sm @error('isi[{{ $index }}]') is-invalid  @enderror" name="isi[{{ $index }}]">{{ old('isi.'.$index) }}</textarea>
+                        {{ $loop->iteration }}. 
+                        <textarea wire:model="noteContents.{{ $index }}" rows="3" type="text" class="mx-1 form-control form-control-sm @error('isi[{{ $index }}]') is-invalid  @enderror" name="isi[{{ $index }}]">{{ old('isi.'.$index) }}</textarea>
                         <button class="btn btn-sm btn-danger" style="height: 50%"  wire:click.prevent="removeContent({{$index}})" ><i class="bi bi-trash"></i></button>  
                         @error('isi[{{ $index }}]')
                         <div class="invalid-feedback">
