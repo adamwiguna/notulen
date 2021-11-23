@@ -20,15 +20,19 @@ class Note extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        // if (isset($filters['cari']) ? $filters['cari'] : false)
-        // {
-        //     return $query->where('judul', 'like', '%'. $filters['cari'].'%')
-        //                  ->orWhere('keterangan', 'like', '%'. $filters['cari'].'%');
-        // }
-
+       
         $query->when($filters['cari'] ?? false, function($query, $cari){
             return $query->where('judul', 'like', '%'. $cari.'%')
                          ->orWhere('keterangan', 'like', '%'. $cari.'%');
+        });
+    }
+
+    public function scopeSearch($query, $term)
+    {
+        $term= "%$term%";
+        $query->where(function ($query) use ($term){
+            $query->where('judul', 'like', $term)
+            ->orWhere('keterangan', 'like', $term);
         });
     }
 

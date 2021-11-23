@@ -46,7 +46,7 @@
         <div class="list-note bg-white">
 
             
-            @livewire('list-note')
+            @livewire('my-list-note')
           
             {{-- @foreach ($notes as $note)              
 

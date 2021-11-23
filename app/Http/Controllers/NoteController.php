@@ -43,9 +43,9 @@ class NoteController extends Controller
                                    'updateHistories' => function ($query) { //query untuk mengambil note yang dibaca berdasarkan user yang login
                                                             $query->where('user_id', auth()->user()->id); //memberikan tambahan kondisi pada orm
                        }])->latest()
-                          ->filter(request(['cari']))
-                          ->paginate($this->pageNumber)
-                          ->withQueryString(),
+                          ->filter(request(['cari'])),
+                        //   ->paginate($this->pageNumber)
+                        //   ->withQueryString(),
             'title' => 'Daftar Note',
             'nav' => 'notes',
             'breadcrumb1' => 'semua',
@@ -78,7 +78,7 @@ class NoteController extends Controller
     public function listMyNote(Request $request)
     {
        $note = Note::where('user_id', auth()->user()->id)->get();
-        return view('note', [
+        return view('my-note', [
             'notes' => Note::where('user_id', auth()->user()->id)->latest()->paginate($this->pageNumber),
             'title' => 'Daftar Note',
             'nav' => 'notes',
