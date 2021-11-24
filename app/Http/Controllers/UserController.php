@@ -55,6 +55,7 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required|min:1|max:255|confirmed',
             'bidang' => '',
+            'jabatan' => 'required',
             'level' => '',
         ]);
 
@@ -73,6 +74,7 @@ class UserController extends Controller
 
         $user = new User([
             'name' => $validatedData[('name')],
+            'jabatan' => $validatedData[('jabatan')],
             'email' => $validatedData[('email')],
             'password' => $validatedData[('password')],
             'authorization_level' => (int)$validatedData[('level')],

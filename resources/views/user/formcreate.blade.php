@@ -13,6 +13,16 @@
       @enderror
     </div>
     <div class="form-group">
+      <label for="nama">Jabatan</label>
+      <input type="text" value="{{ old('jabatan') }}" class="form-control @error('jabatan') is-invalid  @enderror" id="jabatan" placeholder="Masukkan Jabatan" name="jabatan" >
+      @error('name')
+      <div class="invalid-feedback">
+        {{ $message }}
+      </div>
+      @enderror
+    </div>
+    <div class="form-group">
+      <label for="nama">Bidang</label>
       <select class="form-select " aria-label=".form-select-sm example" name="bidang">
         <option selected disabled value="">Bidang</option>
         @foreach ($divisions as $division)
@@ -26,14 +36,15 @@
       @enderror
     </div>
     <div class="form-group">
+      <label for="nama">Level</label>
       <select class="form-select " aria-label=".form-select-sm example" name="level">
         <option selected disabled value="">Authorization Level</option>
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
+        <option value="0">Dapat Lihat Note Sendiri</option>
+        {{-- <option value="1">Dapat Lihat Note Sendiri</option> --}}
+        <option value="2">Dapat Lihat Note Sendiri + Note Pegawai Lain</option>
+        {{-- <option value="3">Dapat Lihat Note Sendiri + Note Pegawai Lain + Histories</option>
+        <option value="4">Dapat Lihat Note Sendiri + Note Pegawai Lain + Histories + List User</option>
+        <option value="5">Dapat Lihat Note Sendiri + Note Pegawai Lain + Histories + List User</option> --}}
       </select>   
       @error('bidang')
       <div class="invalid-feedback">
@@ -42,7 +53,7 @@
       @enderror
     </div>
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">Email/NIP (username untuk melakukan login)</label>
       <input type="text" value="{{ old('email') }}"class="form-control @error('email') is-invalid  @enderror" id="email"  placeholder="Masukkan Email" name="email">
       @error('email')
       <div class="invalid-feedback">

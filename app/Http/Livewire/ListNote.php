@@ -17,6 +17,14 @@ class ListNote extends Component
     public $pageNumber = 10;
     public $search = "";
 
+    public function mount()
+    {
+        (request('cari'))?
+        $this->search = request('cari')
+        :
+        $this->search ="";
+    }
+
     public function render()
     {
         return view('livewire.list-note', [

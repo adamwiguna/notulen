@@ -212,10 +212,10 @@ class NoteController extends Controller
     {
         $validatedData = $request->validate([
             'judul' => 'required|max:255',
-            'keterangan' => 'required',
+            'keterangan' => '',
             'tanggal' => 'required',
             'pemimpin' => 'required',
-            'hadir' => 'required',
+            // 'hadir' => 'required',
         ]);
 
         $note = new Note;
@@ -223,7 +223,7 @@ class NoteController extends Controller
         $note->keterangan = $validatedData[('keterangan')];
         $note->tanggal = $validatedData[('tanggal')];
         $note->pemimpin = $validatedData[('pemimpin')];
-        $note->hadir = $validatedData[('hadir')];
+        $note->hadir = auth()->user()->name;
         $note->user_id = $request['penulis'];
         $note->slug =  Str::random(20);
         $note->division_id =  auth()->user()->division_id;
@@ -231,8 +231,8 @@ class NoteController extends Controller
 
         $attendance = new Attendance;
         $attendance->note_id = $note->id;
-        $attendance->nama = $validatedData[('hadir')];
-        $attendance->instansi = 'Diskominfo';
+        $attendance->nama = auth()->user()->name;
+        $attendance->instansi = auth()->user()->jabatan;
         $attendance->save();
 
         if($request->isi){
@@ -244,37 +244,6 @@ class NoteController extends Controller
                     $noteDetail->save();
                 }
             }
-        }
-
-        if ($request['isi1']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi1'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
-        }
-        if ($request['isi2']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi2'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
-        }
-        if ($request['isi3']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi3'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
-        }
-        if ($request['isi4']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi4'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
-        }
-        if ($request['isi5']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi5'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
         }
 
         // Update di Tabel Histories
@@ -330,14 +299,14 @@ class NoteController extends Controller
             'keterangan' => '',
             'tanggal' => 'required',
             'pemimpin' => 'required',
-            'hadir' => 'required',
+            // 'hadir' => 'required',
         ]);
 
         $note->judul = $validatedData[('judul')];
         $note->keterangan = $validatedData[('keterangan')];
         $note->tanggal = $validatedData[('tanggal')];
         $note->pemimpin = $validatedData[('pemimpin')];
-        $note->hadir = $validatedData[('hadir')];
+        $note->hadir = auth()->user()->name;
         $note->save();
 
         NoteDetail::where('note_id', $note->id)->delete();
@@ -351,37 +320,6 @@ class NoteController extends Controller
                     $noteDetail->save();
                 }
             }
-        }
-
-        if ($request['isi1']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi1'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
-        }
-        if ($request['isi2']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi2'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
-        }
-        if ($request['isi3']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi3'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
-        }
-        if ($request['isi4']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi4'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
-        }
-        if ($request['isi5']) {
-            $noteDetail = new NoteDetail;
-            $noteDetail->isi_note = $request['isi5'];
-            $noteDetail->note_id = $note->id;
-            $noteDetail->save();
         }
 
         $history = new History([
@@ -464,19 +402,19 @@ class NoteController extends Controller
         $note = Note::where('id', $id)->first();
         //dd(count($note->notedetail));
 
-        if(count($note->notedetail)==1){
-            $templateProcessing = new TemplateProcessor('word-template/note1.docx');
-        }elseif (count($note->notedetail)==2) {
-            $templateProcessing = new TemplateProcessor('word-template/note2.docx');
-        }elseif (count($note->notedetail)==3) {
-            $templateProcessing = new TemplateProcessor('word-template/note3.docx');
-        }elseif (count($note->notedetail)==4) {
-            $templateProcessing = new TemplateProcessor('word-template/note4.docx');
-        }elseif (count($note->notedetail)==5) {
-            $templateProcessing = new TemplateProcessor('word-template/note5.docx');
-        }elseif (count($note->notedetail)==0) {
-            $templateProcessing = new TemplateProcessor('word-template/note0.docx');
-        };
+        // if(count($note->notedetail)==1){
+        //     $templateProcessing = new TemplateProcessor('word-template/note1.docx');
+        // }elseif (count($note->notedetail)==2) {
+        //     $templateProcessing = new TemplateProcessor('word-template/note2.docx');
+        // }elseif (count($note->notedetail)==3) {
+        //     $templateProcessing = new TemplateProcessor('word-template/note3.docx');
+        // }elseif (count($note->notedetail)==4) {
+        //     $templateProcessing = new TemplateProcessor('word-template/note4.docx');
+        // }elseif (count($note->notedetail)==5) {
+        //     $templateProcessing = new TemplateProcessor('word-template/note5.docx');
+        // }elseif (count($note->notedetail)==0) {
+        //     $templateProcessing = new TemplateProcessor('word-template/note0.docx');
+        // };
         
         $templateProcessing = new TemplateProcessor('word-template/note.docx');
 

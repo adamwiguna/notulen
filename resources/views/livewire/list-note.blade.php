@@ -14,14 +14,14 @@
             </select>
         </div>
         <div class="col">
-            <form action="/notes">
+            {{-- <form action="/notes"> --}}
                 <div class="input-group mb-3 shadow-sm">
                     <input wire:model="search" type="text"  class="form-control" placeholder="Cari" name="cari" value="{{ request('cari') }}">
                     {{-- <div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="submite">Cari</button>
                     </div> --}}
                   </div>
-            </form>
+            {{-- </form> --}}
         </div>
     </div>    
 

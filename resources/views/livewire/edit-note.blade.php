@@ -4,7 +4,7 @@
         @csrf
           <div class="form-group">
             <label for="judul">Judul</label>
-            <textarea rows="2" type="text" class="form-control form-control-sm @error('judul') is-invalid  @enderror " id="judul" placeholder="Masukkan Judul" name="judul" value="{{ old('judul', $note->judul) }}">{{ old('judul', $note->judul) }}</textarea>
+            <textarea wire:model="judul" rows="2" type="text" class="form-control form-control-sm @error('judul') is-invalid  @enderror " id="judul" placeholder="Masukkan Judul" name="judul" value="{{ old('judul', $note->judul) }}">{{ old('judul', $note->judul) }}</textarea>
             @error('judul')
             <div class="invalid-feedback">
               {{ $message }}
@@ -12,15 +12,15 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="keterangan">Pimpinan Rapat</label>
-            <input type="text" class="form-control form-control-sm @error('pemimpin') is-invalid  @enderror" id="pemimpin"  placeholder="Masukkan Keterangan" name="pemimpin" value="{{ old('pemimpin', $note->pemimpin) }}">
+            <label for="keterangan">Pimpinan/Penyelenggara Rapat</label>
+            <input wire:model="pemimpin" type="text" class="form-control form-control-sm @error('pemimpin') is-invalid  @enderror" id="pemimpin"  placeholder="Masukkan Keterangan" name="pemimpin" value="{{ old('pemimpin', $note->pemimpin) }}">
             @error('pemimpin')
             <div class="invalid-feedback">
               {{ $message }}
             </div>
             @enderror
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="keterangan">Yang Hadir</label>
             <input type="text" class="form-control form-control-sm @error('hadir') is-invalid  @enderror" id="hadir"  placeholder="Masukkan Keterangan" name="hadir" value="{{ old('hadir', $note->hadir) }}">
             @error('hadir')
@@ -28,10 +28,10 @@
               {{ $message }}
             </div>
             @enderror
-          </div>
+          </div> --}}
           <div class="form-group">
             <label for="keterangan">Keterangan</label>
-            <input type="text" class="form-control form-control-sm @error('keterangan') is-invalid  @enderror" id="keterangan"  placeholder="Masukkan Keterangan" name="keterangan" value="{{ old('keterangan', $note->keterangan) }}">
+            <input wire:model="keterangan" type="text" class="form-control form-control-sm @error('keterangan') is-invalid  @enderror" id="keterangan"  placeholder="Masukkan Keterangan" name="keterangan" value="{{ old('keterangan', $note->keterangan) }}">
             @error('keterangan')
             <div class="invalid-feedback">
               {{ $message }}
@@ -40,7 +40,7 @@
           </div>
           <div class="form-group">
             <label for="tanggal">Tanggal</label>
-            <input type="date" class="form-control form-control-sm @error('tanggal') is-invalid  @enderror" id="tanggal" name="tanggal" value="{{ old('tanggal', $note->tanggal) }}">
+            <input wire:model="tanggal" type="date" class="form-control form-control-sm @error('tanggal') is-invalid  @enderror" id="tanggal" name="tanggal" value="{{ old('tanggal', $note->tanggal) }}">
             @error('tanggal')
             <div class="invalid-feedback">
               {{ $message }}

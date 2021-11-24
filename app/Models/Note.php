@@ -32,7 +32,11 @@ class Note extends Model
         $term= "%$term%";
         $query->where(function ($query) use ($term){
             $query->where('judul', 'like', $term)
-            ->orWhere('keterangan', 'like', $term);
+                  ->orWhere('keterangan', 'like', $term)
+                  ->orWhere('pemimpin', 'like', $term)
+                  ->orWhereHas('user', function($query) use ($term){
+                      $query->where('name', 'like', $term);
+                  });
         });
     }
 

@@ -50,9 +50,9 @@
           </td>
         </tr>
         <tr>
-          <td class="align-baseline">Yang Hadir </td>
+          <td class="align-baseline">Penulis </td>
           <td class="align-baseline"> : </td>
-          <td>{{ $notes->hadir }} </td>
+          <td>{{ $notes->user->name }} </td>
         </tr>
         <tr>
           <td class="align-baseline">Keterangan </td>

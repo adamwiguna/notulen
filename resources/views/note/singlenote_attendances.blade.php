@@ -40,7 +40,7 @@
                 <input type="hidden"  name="note_id" id="" value="{{ $notes->id }}">
                 <input type="hidden"  name="note_slug" id="" value="{{ $notes->slug }}">
                   <input type="text" class="form-control form-control-sm" placeholder="Nama" name="nama" id="nama" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ old('nama')}}">
-                  <input type="text" class="form-control form-control-sm" placeholder="Instansi" name="instansi" id="instansi" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ old('instansi', 'Diskominfo')}}">
+                  <input type="text" class="form-control form-control-sm" placeholder="Instansi/Jabatan" name="instansi" id="instansi" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{ old('instansi')}}">
                   <div class="input-group-append">
                     <button class="btn btn-sm btn-success" type="submit"><i class="bi bi-plus-square"></i></button>
                   </div>
@@ -57,7 +57,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nama</th>
-                <th scope="col">Instansi</th>
+                <th scope="col">Instansi/Jabatan</th>
                 @can('deleteAttendances', $notes)
                 <th scope="col">Aksi</th>
                 @endcan

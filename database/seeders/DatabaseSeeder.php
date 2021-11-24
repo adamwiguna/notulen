@@ -90,12 +90,12 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
        \App\Models\Division::create([
-            'name' => 'STATISTIK',
+            'name' => 'SDI',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
        \App\Models\Division::create([
-            'name' => 'SEKRE',
+            'name' => 'SEKRETARIAT',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -110,10 +110,10 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        \App\Models\User::factory(50)->create();
-        \App\Models\Note::factory(1000)->create();
-        \App\Models\NoteDetail::factory(3000)->create();
-        \App\Models\Note_Image::factory(10000)->create();
-        \App\Models\Attendance::factory(10000)->create();
+        // \App\Models\User::factory(50)->create();
+        // \App\Models\Note::factory(1000)->create();
+        // \App\Models\NoteDetail::factory(3000)->create();
+        // \App\Models\Note_Image::factory(10000)->create();
+        // \App\Models\Attendance::factory(10000)->create();
     }
 }

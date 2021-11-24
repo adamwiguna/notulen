@@ -11,7 +11,7 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="keterangan">Pimpinan Rapat</label>
+            <label for="keterangan">Pimpinan/Penyelenggara Rapat</label>
             <input type="text" class="form-control form-control-sm @error('pemimpin') is-invalid  @enderror" id="pemimpin"  placeholder="Masukkan Keterangan" name="pemimpin" value="{{ old('pemimpin') }}">
             @error('pemimpin')
             <div class="invalid-feedback">
@@ -19,7 +19,7 @@
             </div>
             @enderror
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="keterangan">Yang Hadir </label>
             <input type="text" class="form-control form-control-sm @error('hadir') is-invalid  @enderror" id="hadir"  placeholder="Masukkan Keterangan" name="hadir" value="{{ old('hadir', auth()->user()->name) }}">
             @error('hadir')
@@ -27,7 +27,7 @@
               {{ $message }}
             </div>
             @enderror
-          </div>
+          </div> --}}
           <div class="form-group">
             <label for="keterangan">Keterangan</label>
             <input type="text" class="form-control form-control-sm @error('keterangan') is-invalid  @enderror" id="keterangan"  placeholder="Masukkan Keterangan" name="keterangan" value="{{ old('keterangan') }}">
